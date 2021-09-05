@@ -1,0 +1,12 @@
+version: '3'
+services:
+      db:
+            container_name: fast-store.db
+            image: mysql:8.0.22
+            ports:
+                  - 3360:3306
+            environment:
+                  MYSQL_DATABASE: fast-store
+                  MYSQL_ROOT_PASSWORD: 131367Nhan
+            volumes:
+                  - ./data/mysql:/var/lib/mysql
