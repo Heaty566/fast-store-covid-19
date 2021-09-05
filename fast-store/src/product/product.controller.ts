@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
@@ -23,7 +23,7 @@ export class ProductController {
       }
 
       @Post()
-      // @UseGuards(UserGuard)
+      @UseGuards(UserGuard)
       @UseInterceptors(
             FileInterceptor('image', {
                   dest: 'public/',
@@ -66,7 +66,7 @@ export class ProductController {
             const insertedProduct = await this.productService.saveProduct(product);
             if (!insertedProduct) throw apiResponse.sendError({}, 'InternalServerErrorException');
 
-            return apiResponse.send({ details: { message: { type: 'message.update-success' } } });
+            return apiResponse.send({ details: { message: { type: 'message.add-success' } } });
       }
 
       @Put()
@@ -83,5 +83,13 @@ export class ProductController {
             if (!insertedProduct) throw apiResponse.sendError({}, 'InternalServerErrorException');
 
             return apiResponse.send({ details: { message: { type: 'message.update-success' } } });
+      }
+
+      @Delete(':id')
+      @UseGuards(UserGuard)
+      async deleteProduct(@Param('id') id: string) {
+            await this.productService.deleteProduct(id);
+
+            return apiResponse.send({ details: { message: { type: 'message.delete-success' } } });
       }
 }

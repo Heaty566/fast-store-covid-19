@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Product } from "../common/interface/product.interface";
+import { Product } from "../../common/interface/product.interface";
 
 interface CartItemProps {
         product: Product;
@@ -10,11 +10,7 @@ const CartItem: React.FunctionComponent<CartItemProps> = ({ product, handleOnCha
         return (
                 <div className="flex items-center justify-between h-24 p-2 space-x-2 bg-white rounded-lg shadow-lg">
                         <div className="w-16 h-16 overflow-hidden border-2 rounded-full ">
-                                <img
-                                        src="https://w.ladicdn.com/s150x150/1744/mi-trung-safoco-400g-20210827094232.jpg"
-                                        alt="mi"
-                                        className="block object-cover"
-                                />
+                                <img src={process.env.REACT_APP_SERVER_URL + product.imageUrl} alt="mi" className="block object-cover" />
                         </div>
                         <div className="w-1/2 space-y-1">
                                 <p className="font-semibold">{product.name}</p>

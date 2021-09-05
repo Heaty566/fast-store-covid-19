@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Product } from "../common/interface/product.interface";
-import { OrderItem } from "../container/order";
-import CartItem from "./cartItem";
+import { OrderItem } from "../container/homePage";
+import CartItem from "./product/cartItem";
 
 interface CartProps {
         products: Product[];

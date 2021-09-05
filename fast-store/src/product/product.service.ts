@@ -21,4 +21,8 @@ export class ProductService {
       public async getProductsByIds(ids: string[]) {
             return await this.productRepository.getManyByIds(ids);
       }
+
+      public async deleteProduct(id: string) {
+            return await this.deleteProduct(id);
+      }
 }

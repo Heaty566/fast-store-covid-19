@@ -25,4 +25,8 @@ export class ProductRepository extends RepositoryService<Product> {
       public async getManyByIds(ids: string[]) {
             return await this.findManyByArrayValue('id', ids, true);
       }
+
+      public async deleteOne(id: string) {
+            return await this.createQueryBuilder().delete().where('id = :id', { id }).execute();
+      }
 }

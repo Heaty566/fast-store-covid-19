@@ -1,23 +1,23 @@
-import * as React from "react";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { productAPI } from "../api/productApi";
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { productAPI } from '../api/productApi';
 
-import useFormError from "../common/hooks/useFormError";
-import { useUploadFile } from "../common/hooks/useUploadFile";
-import { ApiState } from "../common/interface/api.interface";
-import { AddNewProductForm } from "../common/interface/dto/product.dto";
-import FormButton from "../components/formBtn";
-import FormMsg from "../components/formMsg";
-import TextField from "../components/textFiled";
-import { RootState } from "../store";
+import useFormError from '../common/hooks/useFormError';
+import { useUploadFile } from '../common/hooks/useUploadFile';
+import { ApiState } from '../common/interface/api.interface';
+import { AddNewProductForm } from '../common/interface/dto/product.dto';
+import FormButton from '../components/form/formBtn';
+import FormMsg from '../components/form/formMsg';
+import TextField from '../components/form/textFiled';
+import { RootState } from '../store';
 interface AddNewProductProps {}
 
 const defaultValues: AddNewProductForm = {
-        image: "",
-        name: "",
-        price: "",
-        quantity: "",
+        image: '',
+        name: '',
+        price: '',
+        quantity: '',
 };
 
 const AddNewProduct: React.FunctionComponent<AddNewProductProps> = () => {
@@ -52,7 +52,7 @@ const AddNewProduct: React.FunctionComponent<AddNewProductProps> = () => {
                         />
                         <div className="space-y-2">
                                 <img
-                                        src={file ? URL.createObjectURL(file) : "/asset/images/default-image.jpg"}
+                                        src={file ? URL.createObjectURL(file) : '/asset/images/default-image.jpg'}
                                         className="w-16 h-16"
                                         alt="san pham"
                                 />

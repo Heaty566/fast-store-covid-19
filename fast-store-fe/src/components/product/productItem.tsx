@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Product } from "../common/interface/product.interface";
+import { Product } from "../../common/interface/product.interface";
 
 interface ProductCardProps {
         value: Product;
         handleOnAdd: (id: string, quantity: number) => void;
 }
 
-const ProductCard: React.FunctionComponent<ProductCardProps> = ({ value, handleOnAdd }) => {
+const ProductItem: React.FunctionComponent<ProductCardProps> = ({ value, handleOnAdd }) => {
         return (
                 <div className="flex items-center justify-between h-24 p-2 space-x-2 bg-white rounded-lg shadow-lg">
                         <div className="w-16 h-16 overflow-hidden border-2 rounded-full ">
@@ -24,4 +24,4 @@ const ProductCard: React.FunctionComponent<ProductCardProps> = ({ value, handleO
         );
 };
 
-export default ProductCard;
+export default ProductItem;

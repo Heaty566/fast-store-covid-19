@@ -1,50 +1,32 @@
 import * as React from "react";
-import { useForm } from "react-hook-form";
-import useFormError from "../common/hooks/useFormError";
-import TextField from "./textFiled";
+import { UseFormRegister } from "react-hook-form";
+import TextField from "./form/textFiled";
 import { CreateOrderDto } from "../common/interface/dto/order.dto";
-import FormButton from "./formBtn";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import FormButton from "./form/formBtn";
 import { ApiState } from "../common/interface/api.interface";
-import { orderApi } from "../api/orderApi";
+import AreaField from "./form/areaField";
+import FormMsg from "./form/formMsg";
 
-interface ContactFormProps {}
+interface ContactFormProps {
+        errors: CreateOrderDto;
+        apiState: ApiState;
+        register: UseFormRegister<CreateOrderDto>;
+        handleOnSubmit: React.FormEventHandler<HTMLFormElement>;
+}
 
-const defaultValues: CreateOrderDto = {
-        address: "",
-        name: "",
-        phone: "",
-        products: [],
-};
-
-const ContactForm: React.FunctionComponent<ContactFormProps> = () => {
-        const { register, reset, handleSubmit } = useForm<CreateOrderDto>({ defaultValues });
-        const errors = useFormError<CreateOrderDto>(defaultValues);
-        const apiState = useSelector<RootState, ApiState>((state) => state.api);
-
-        const handleOnSend = (input: CreateOrderDto) => {
-                const cart = localStorage.getItem("cart");
-                if (cart) {
-                        orderApi.createOrder({ name: input.name, address: input.address, phone: input.phone, products: JSON.parse(cart) }).then(
-                                () => {
-                                        reset(defaultValues);
-                                        localStorage.setItem("cart", JSON.stringify([]));
-                                }
-                        );
-                }
-        };
-
+const ContactForm: React.FunctionComponent<ContactFormProps> = ({ errors, apiState, register, handleOnSubmit }) => {
         return (
-                <form onSubmit={handleSubmit(handleOnSend)} className="p-2 space-y-2 bg-white rounded-lg shadow-lg md:w-101">
+                <form onSubmit={handleOnSubmit} className="p-2 space-y-2 bg-white rounded-lg shadow-lg md:w-101">
+                        <FormMsg
+                                isError={apiState.isError}
+                                isLoading={apiState.isLoading}
+                                errorMessage={apiState.errorMessage}
+                                message={apiState.message}
+                        />
                         <TextField error={errors.name} field="name" label="Họ Và Tên" register={register} />
                         <TextField error={errors.phone} field="phone" label="Số Điện Thoại" register={register} />
                         <TextField error={errors.address} field="address" label="Địa Chỉ" register={register} />
-
-                        <div>
-                                <label className="font-medium">Ghi Chú</label>
-                                <textarea className="block w-full px-2 py-1 border rounded-sm focus:outline-none"> </textarea>
-                        </div>
+                        <AreaField error={errors.message} field="message" label="Ghi Chú" register={register} />
                         <FormButton isLoading={apiState.isLoading} label="Đặt Hàng" />
                 </form>
         );

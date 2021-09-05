@@ -36,15 +36,10 @@ export function routers(app: INestApplication) {
             }),
       );
 
-      //global filter
-
-      //for production
-      // if (process.env.NODE_ENV === 'production') {
       app.use(helmet());
       app.use(compression());
       app.useGlobalFilters(new NotFoundApiHandler());
       app.useGlobalFilters(new RuntimeApiHandler());
-      // }
 
       //for developer
       if (process.env.NODE_ENV === 'development') {
@@ -56,12 +51,7 @@ export function routers(app: INestApplication) {
             //set header
             res.header('Access-Control-Allow-Methods', 'POST, GET, PUT');
             res.header('Access-Control-Allow-Headers', '*');
-
-            const lang = req.cookies['lang'] || '';
-            if (!lang) {
-                  I18n.setLocale('en');
-                  res.cookie('lang', 'en', { maxAge: 86400 * 30 });
-            } else I18n.setLocale(lang);
+            I18n.setLocale('vi');
 
             next();
       });

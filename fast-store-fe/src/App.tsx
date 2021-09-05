@@ -6,7 +6,7 @@ import { AuthState } from "./common/interface/user.interface";
 import AddNewProduct from "./container/addNewProudct";
 import LoginGoogle from "./container/login";
 import ManagementPage from "./container/managementPage";
-import Order from "./container/order";
+import HomePage from "./container/homePage";
 import { RootState, store } from "./store";
 import { authActions } from "./store/auth";
 
@@ -38,7 +38,7 @@ function App() {
                                 <Route path="/login" component={LoginGoogle} />
                                 <Route path="/manager" component={ManagementPage} />
                                 <Route path="/add-new" component={AddNewProduct} />
-                                <Route path="/" component={Order} />
+                                <Route path="/" component={HomePage} />
                         </Switch>
                 </div>
         );

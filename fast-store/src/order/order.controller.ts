@@ -3,8 +3,8 @@ import { apiResponse } from 'src/app/interface/apiResponse';
 import { ProductService } from '../product/product.service';
 import { JoiValidatorPipe } from '../utils/validator/validator.pipe';
 import { NewOrderDto, vNewOrderDto } from './dto/newOrderDto';
-import axios from 'axios';
 import { OrderService } from './order.service';
+import axios from 'axios';
 
 @Controller('order')
 export class OrderController {
@@ -13,7 +13,6 @@ export class OrderController {
       @Post()
       async newOrder(@Body(new JoiValidatorPipe(vNewOrderDto)) body: NewOrderDto) {
             const productIds = body.products.map((item) => item.id);
-            console.log(productIds);
 
             const products = await this.productService.getProductsByIds(productIds);
             if (productIds.length !== products.length) {
@@ -49,13 +48,15 @@ export class OrderController {
 
             const formatMessage =
                   `[${new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' })}] Level: ${'Don Hang Moi'} \n\n` +
-                  `Thong tin nguoi nhan\n` +
+                  `Thong tin nguoi nhan\n\n` +
                   `Ten: ${body.name}\n` +
                   `SDT: ${body.phone}\n` +
-                  `DIA CHI: ${body.address}\n\n` +
-                  `Thong Tin Don Hang\n` +
+                  `DIA Chi: ${body.address}\n` +
+                  `Ghi Chu: ${body.message}\n\n` +
+                  `Thong Tin Don Hang\n\n` +
                   `${orderMessage}\n\n` +
                   '- - - - - - - - - - - - - - - - - - - - -';
+
             const url = `${process.env.TELEGRAM_URL}${process.env.TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${
                   process.env.CHAT_ID
             }&text=${this.orderService.removeVietnameseTones(formatMessage)}`;
@@ -66,6 +67,6 @@ export class OrderController {
                   await this.productService.saveProduct(item);
             });
 
-            return apiResponse.send({ details: { message: { type: 'message.update-success' } } });
+            return apiResponse.send({ details: { message: { type: 'message.order-success' } } });
       }
 }

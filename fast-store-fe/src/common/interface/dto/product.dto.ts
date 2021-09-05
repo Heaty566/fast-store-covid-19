@@ -18,3 +18,10 @@ export interface UpdateProductDto {
         quantity: number;
         id: string;
 }
+
+export interface UpdateProductForm {
+        name: string;
+        price: string;
+        quantity: string;
+        id: string;
+}
