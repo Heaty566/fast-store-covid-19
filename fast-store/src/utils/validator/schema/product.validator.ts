@@ -11,8 +11,8 @@ export function productJoiSchema(field: keyof Product) {
             case 'imageUrl':
                   return Joi.string().trim().required();
             case 'price':
-                  return Joi.number().required();
+                  return Joi.number().min(0).required();
             case 'quantity':
-                  return Joi.number().required();
+                  return Joi.number().min(0).max(10000).required();
       }
 }

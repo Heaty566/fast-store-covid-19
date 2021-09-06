@@ -1,5 +1,5 @@
-import * as React from "react";
-import { UseFormRegister } from "react-hook-form";
+import * as React from 'react';
+import { UseFormRegister } from 'react-hook-form';
 
 interface AreaFieldProps {
         field: string;
@@ -17,7 +17,7 @@ const AreaField: React.FunctionComponent<AreaFieldProps> = ({ error, field, labe
                         <textarea {...register(field)} className="block w-full px-2 py-1 border rounded-sm focus:outline-none"></textarea>
                         {Boolean(error.length) && (
                                 <p className="text-red-500">
-                                        {field} {error}
+                                        {label} {error}
                                 </p>
                         )}
                 </div>

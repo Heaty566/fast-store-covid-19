@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Product } from "../../common/interface/product.interface";
+import * as React from 'react';
+import { Product } from '../../common/interface/product.interface';
 
 interface CartItemProps {
         product: Product;
@@ -8,12 +8,12 @@ interface CartItemProps {
 
 const CartItem: React.FunctionComponent<CartItemProps> = ({ product, handleOnChange }) => {
         return (
-                <div className="flex items-center justify-between h-24 p-2 space-x-2 bg-white rounded-lg shadow-lg">
+                <div className="flex items-center justify-between p-2 space-x-2 bg-white rounded-lg shadow-lg fade-in">
                         <div className="w-16 h-16 overflow-hidden border-2 rounded-full ">
-                                <img src={process.env.REACT_APP_SERVER_URL + product.imageUrl} alt="mi" className="block object-cover" />
+                                <img src={process.env.REACT_APP_STATIC_URL + product.imageUrl} alt="mi" className="block object-cover" />
                         </div>
                         <div className="w-1/2 space-y-1">
-                                <p className="font-semibold">{product.name}</p>
+                                <p className="font-semibold first-letter">{product.name}</p>
                                 <div className="flex space-x-2">
                                         <button
                                                 type="button"
@@ -33,7 +33,7 @@ const CartItem: React.FunctionComponent<CartItemProps> = ({ product, handleOnCha
                                 </div>
                         </div>
 
-                        <p className="flex-1 font-medium text-right text-yellow-600">{(product.price * product.quantity).toLocaleString("it-IT")}đ</p>
+                        <p className="flex-1 font-medium text-right text-yellow-600">{(product.price * product.quantity).toLocaleString('it-IT')}đ</p>
                 </div>
         );
 };

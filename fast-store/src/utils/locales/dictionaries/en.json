@@ -1,6 +1,6 @@
 {
       "error.invalid-input": "your request body is wrong",
-
+      "error.order-wrong": "Đặt hàng xảy ra lỗi,vui lòng xóa giỏ hàng và thêm lại",
       "field.field-taken": "is taken",
       "error.not-enough": "{{name}} chỉ còn lại {{quantity}}",
       "field.not-found": "is not found",

@@ -23,6 +23,6 @@ export class ProductService {
       }
 
       public async deleteProduct(id: string) {
-            return await this.deleteProduct(id);
+            return await this.productRepository.deleteOne(id);
       }
 }

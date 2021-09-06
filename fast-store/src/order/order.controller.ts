@@ -13,16 +13,15 @@ export class OrderController {
       @Post()
       async newOrder(@Body(new JoiValidatorPipe(vNewOrderDto)) body: NewOrderDto) {
             const productIds = body.products.map((item) => item.id);
-
             const products = await this.productService.getProductsByIds(productIds);
             if (productIds.length !== products.length) {
-                  throw apiResponse.sendError({ details: { errorMessage: { type: 'field.not-found' } } }, 'BadRequestException');
+                  throw apiResponse.sendError({ details: { errorMessage: { type: 'error.order-wrong' } } }, 'BadRequestException');
             }
 
             const checkProduct = products.map((item) => {
                   const index = productIds.indexOf(item.id);
                   if (index === -1) {
-                        throw apiResponse.sendError({ details: { errorMessage: { type: 'field.not-found' } } }, 'BadRequestException');
+                        throw apiResponse.sendError({ details: { errorMessage: { type: 'error.order-wrong' } } }, 'BadRequestException');
                   }
 
                   if (item.quantity < body.products[index].quantity) {

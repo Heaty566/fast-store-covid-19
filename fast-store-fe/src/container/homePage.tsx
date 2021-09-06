@@ -35,20 +35,29 @@ const HomePage: React.FunctionComponent<OrderProps> = () => {
         const apiState = useSelector<RootState, ApiState>((state) => state.api);
 
         const handleOnOrder = (input: CreateOrderDto) => {
-                const cart = localStorage.getItem('cart');
-                if (cart) {
-                        orderApi.createOrder({
-                                name: input.name,
-                                message: input.message,
-                                address: input.address,
-                                phone: input.phone,
-                                products: JSON.parse(cart),
-                        }).then(() => {
-                                reset(defaultValues);
-                                localStorage.setItem('cart', JSON.stringify([]));
-                                setOrderItems([]);
-                        });
-                }
+                const filterProduct = orderItems
+                        .map((item) => {
+                                const product = products.filter((product) => product.id === item.id)[0];
+                                if (!product) return null;
+                                product.quantity = item.quantity;
+                                return {
+                                        id: item.id,
+                                        quantity: item.quantity,
+                                };
+                        })
+                        .filter((item) => item != null) as OrderItem[];
+
+                orderApi.createOrder({
+                        name: input.name,
+                        message: input.message,
+                        address: input.address,
+                        phone: input.phone,
+                        products: filterProduct,
+                }).then(() => {
+                        reset(defaultValues);
+                        localStorage.setItem('cart', JSON.stringify([]));
+                        setOrderItems([]);
+                });
         };
 
         React.useEffect(() => {
@@ -79,10 +88,12 @@ const HomePage: React.FunctionComponent<OrderProps> = () => {
         };
 
         return (
-                <div className="flex flex-col justify-center flex-1 py-8 space-y-4 md:flex-row md:space-x-4 md:space-y-0">
+                <div className="flex flex-col justify-center flex-1 py-8 mb-24 space-y-4 md:flex-row md:space-x-4 md:space-y-0">
                         <ListProduct products={products} handleOnAdd={handleOnAddToCart} />
                         <div className="space-y-2">
-                                <h1 className="text-xl font-semibold">Thông Tin Người Nhận</h1>
+                                <h1 className="text-xl font-semibold" id="info">
+                                        Thông Tin Người Nhận
+                                </h1>
                                 <ContactForm apiState={apiState} errors={errors} handleOnSubmit={handleSubmit(handleOnOrder)} register={register} />
                                 <Cart products={products} orderItems={orderItems} handleOnChange={handleOnAddToCart} />
                         </div>

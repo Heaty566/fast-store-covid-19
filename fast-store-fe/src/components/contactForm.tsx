@@ -1,11 +1,11 @@
-import * as React from "react";
-import { UseFormRegister } from "react-hook-form";
-import TextField from "./form/textFiled";
-import { CreateOrderDto } from "../common/interface/dto/order.dto";
-import FormButton from "./form/formBtn";
-import { ApiState } from "../common/interface/api.interface";
-import AreaField from "./form/areaField";
-import FormMsg from "./form/formMsg";
+import * as React from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import TextField from './form/textFiled';
+import { CreateOrderDto } from '../common/interface/dto/order.dto';
+import FormButton from './form/formBtn';
+import { ApiState } from '../common/interface/api.interface';
+import AreaField from './form/areaField';
+import FormMsg from './form/formMsg';
 
 interface ContactFormProps {
         errors: CreateOrderDto;

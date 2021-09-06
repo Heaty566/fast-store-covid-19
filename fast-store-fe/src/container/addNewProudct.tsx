@@ -44,6 +44,7 @@ const AddNewProduct: React.FunctionComponent<AddNewProductProps> = () => {
 
         return (
                 <form onSubmit={handleSubmit(onSubmit)} className="p-2 my-2 space-y-2 bg-white rounded-lg shadow-lg md:w-101">
+                        <h1 className="text-2xl font-semibold">Thêm Sản Phẩm Mới</h1>
                         <FormMsg
                                 isError={apiState.isError}
                                 isLoading={apiState.isLoading}

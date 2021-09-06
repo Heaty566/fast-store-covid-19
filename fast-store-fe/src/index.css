@@ -50,3 +50,11 @@
 .fade-in {
         animation: 0.3s forwards FadeIn;
 }
+
+.first-letter::first-letter {
+        text-transform: uppercase;
+}
+
+html {
+        scroll-behavior: smooth;
+}

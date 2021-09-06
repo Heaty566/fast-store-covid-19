@@ -23,24 +23,14 @@ const DBConfig = TypeOrmModule.forRoot({
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      synchronize: false,
+      synchronize: true,
       keepConnectionAlive: true,
       entities: [User, Product],
       extra: { connectionLimit: 1 },
 });
 
 @Module({
-      imports: [
-            Config,
-            DBConfig,
-            AuthModule,
-            UserModule,
-            ProductModule,
-            OrderModule,
-            ServeStaticModule.forRoot({
-                  rootPath: path.join(__dirname, '..', 'public'),
-            }),
-      ],
+      imports: [Config, DBConfig, AuthModule, UserModule, ProductModule, OrderModule],
       controllers: [],
       providers: [],
 })

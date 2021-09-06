@@ -1,15 +1,15 @@
-import * as React from "react";
-import { UseFormRegister } from "react-hook-form";
+import * as React from 'react';
+import { UseFormRegister } from 'react-hook-form';
 
 interface TextFieldProps {
         field: string;
         label: string;
         register: UseFormRegister<any>;
         error: string;
-        type?: "text" | "number";
+        type?: 'text' | 'number';
 }
 
-const TextField: React.FunctionComponent<TextFieldProps> = ({ field, label, register, error, type = "text" }) => {
+const TextField: React.FunctionComponent<TextFieldProps> = ({ field, label, register, error, type = 'text' }) => {
         return (
                 <div className="space-y-1">
                         <label className="font-medium" htmlFor={field}>
@@ -18,7 +18,7 @@ const TextField: React.FunctionComponent<TextFieldProps> = ({ field, label, regi
                         <input type={type} {...register(field)} className="block w-full px-2 py-1 border rounded-sm focus:outline-none" />
                         {Boolean(error.length) && (
                                 <p className="text-red-500">
-                                        {field} {error}
+                                        {label} {error}
                                 </p>
                         )}
                 </div>

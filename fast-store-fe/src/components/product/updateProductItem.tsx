@@ -9,6 +9,7 @@ import TextField from '../form/textFiled';
 
 interface UpdateProductProps {
         value: Product;
+        handleOnDelete: (id: string) => void;
 }
 const defaultValues: UpdateProductForm = {
         id: '',
@@ -17,7 +18,7 @@ const defaultValues: UpdateProductForm = {
         quantity: '',
 };
 
-const UpdateProductItem: React.FunctionComponent<UpdateProductProps> = ({ value }) => {
+const UpdateProductItem: React.FunctionComponent<UpdateProductProps> = ({ value, handleOnDelete }) => {
         const errors = useFormError<UpdateProductForm>(defaultValues);
         const { register, handleSubmit } = useForm<UpdateProductDto>({
                 defaultValues: {
@@ -35,16 +36,27 @@ const UpdateProductItem: React.FunctionComponent<UpdateProductProps> = ({ value 
                 <form onSubmit={handleSubmit(handleOnUpdate)} className="p-4 space-y-2 border border-gray-300 rounded-lg ">
                         <div className="w-16 h-16">
                                 <img
-                                        src={process.env.REACT_APP_SERVER_URL + value.imageUrl}
+                                        src={process.env.REACT_APP_STATIC_URL + value.imageUrl}
                                         className="object-cover w-full h-full"
                                         alt={value.name}
                                 />
                         </div>
                         <TextField error={errors.name} field="name" label="Tên" register={register} />
                         <TextField error={errors.quantity} type="number" field="quantity" label="Số Lượng" register={register} />
-                        <TextField error={''} type="number" field="price" label="Giá" register={register} />{' '}
-                        <div className="w-24">
-                                <FormButton label={'Update'} isLoading={false} />
+                        <TextField error={errors.price} type="number" field="price" label="Giá" register={register} />{' '}
+                        <div className="flex space-x-2">
+                                <div className="w-24">
+                                        <FormButton label={'Update'} isLoading={false} />
+                                </div>
+                                <div>
+                                        <button
+                                                type="button"
+                                                className="p-2 text-white bg-red-500 rounded-md"
+                                                onClick={() => handleOnDelete(value.id)}
+                                        >
+                                                Delete
+                                        </button>
+                                </div>
                         </div>
                 </form>
         );

@@ -8,6 +8,8 @@ import * as session from 'express-session';
 import { INestApplication } from '@nestjs/common';
 import { NotFoundApiHandler } from './app/exception/notfound.exception';
 import { RuntimeApiHandler } from './app/exception/runtime.exception';
+import * as path from 'path';
+import * as express from 'express';
 
 I18n.configure({
       locales: ['en', 'vi'],
@@ -27,6 +29,7 @@ export function routers(app: INestApplication) {
       app.setGlobalPrefix('/api');
       app.use(cookieParser());
       app.enableCors({ origin: [process.env.CLIENT_URL, process.env.ADMIN_URL], credentials: true });
+      app.use('/api/public', express.static(path.join(process.cwd(), 'public')));
       //session
       app.use(
             session({
