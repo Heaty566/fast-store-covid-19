@@ -1,4 +1,4 @@
-# Fast Store - [Live Demo](https://store.vinhnhan.com)
+# Fast Store - [Live Demo](https://faststore.vinhnhan.com)
 
 A lightweight shopping store allows the store's owner can deploy and run it as fast as possible
 
@@ -22,7 +22,12 @@ Due to Covid-19, Many store's owners need a fast shopping store for their custom
 
 ## Project Image
 
+### Customer Page
+
 ![Home Page](doc/home-page.jpg)
+
+### Telegram Notification
+
 ![Order](doc/order.jpg)
 
 ## Extend Feature

@@ -1,0 +1,43 @@
+version: "3"
+services:
+        # db:
+        #         container_name: fast-store.db
+        #         image: mysql:8.0.22
+        #         ports:
+        #                 - 3360:3306
+        #         environment:
+        #                 MYSQL_DATABASE: fast-store
+        #                 MYSQL_ROOT_PASSWORD: 131367Nhan
+        #         volumes:
+        #                 - ./data/mysql:/var/lib/mysql
+
+        client:
+                build: ./fast-store-fe/.
+                image: heaty566/fast-store-fe:latest
+                expose:
+                        - 3000
+        # server:
+        #         build: .
+        #         image: heaty566/fast-store:latest
+        #         expose:
+        #                 - 4000
+        #         volumes:
+        #                 - /data/public:/public
+        # certbot:
+        #       image: certbot/certbot
+        #       restart: unless-stopped
+        #       volumes:
+        #             - ./data/certbot/conf:/etc/letsencrypt
+        #             - ./data/certbot/www:/var/www/certbot
+        #       entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+        # nginx:
+        #       image: nginx:1.15-alpine
+        #       restart: unless-stopped
+        #       ports:
+        #             - 80:80
+        #             - 443:443
+        #       volumes:
+        #             - ./data/certbot/conf:/etc/letsencrypt
+        #             - ./data/certbot/www:/var/www/certbot
+        #             - ./data/nginx:/etc/nginx/conf.d
+        #       command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
