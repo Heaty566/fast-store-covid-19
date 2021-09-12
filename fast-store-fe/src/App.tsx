@@ -1,21 +1,21 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Switch, Route, Link } from "react-router-dom";
-import Cookies from "universal-cookie";
-import { AuthState } from "./common/interface/user.interface";
-import AddNewProduct from "./container/addNewProudct";
-import LoginGoogle from "./container/login";
-import ManagementPage from "./container/managementPage";
-import HomePage from "./container/homePage";
-import { RootState, store } from "./store";
-import { authActions } from "./store/auth";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Switch, Route, Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import { AuthState } from './common/interface/user.interface';
+import AddNewProduct from './container/addNewProudct';
+import LoginGoogle from './container/login';
+import ManagementPage from './container/managementPage';
+import HomePage from './container/homePage';
+import { RootState, store } from './store';
+import { authActions } from './store/auth';
 
 function App() {
         const authState = useSelector<RootState, AuthState>((api) => api.auth);
 
         useEffect(() => {
                 const cookies = new Cookies();
-                const authToken = cookies.get("auth-token");
+                const authToken = cookies.get('auth-token');
                 if (authToken) store.dispatch(authActions.updateLogin());
         }, []);
 
@@ -34,6 +34,17 @@ function App() {
                                         </Link>
                                 </div>
                         )}
+                        <div>
+                                <p className="text-red-500">Đây là website demo</p>
+                                <a
+                                        className="underline duration-300 hover:text-blue-600"
+                                        href="https://www.facebook.com/Heaty566"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                >
+                                        Liên hệ Phạm Vĩnh Nhân
+                                </a>
+                        </div>
                         <Switch>
                                 <Route path="/login" component={LoginGoogle} />
                                 <Route path="/manager" component={ManagementPage} />
